@@ -14,15 +14,10 @@ from telethon.tl.types import ChannelParticipantsSearch
 # класс для работы с сообщениями
 from telethon.tl.functions.messages import GetHistoryRequest
 
-#config = configparser.ConfigParser()
-#config.read("config.ini")
-
 # Присваиваем значения внутренним переменным
-api_id = '2587009'
-api_hash = '002836a1710a4d4f0b48d0e603692567'
-username = 'flaiers'
-
-#proxy = (proxy_server, proxy_port, proxy_key)
+api_id = 'api_id'
+api_hash = 'api_hash'
+username = 'username'
 
 client = TelegramClient(username, api_id, api_hash)
 
@@ -61,7 +56,7 @@ async def dump_all_participants(channel):
 		json.dump(all_users_details, outfile, ensure_ascii=False)
 
 
-"""async def dump_all_messages(channel):
+async def dump_all_messages(channel):
 	'''Записывает json-файл с информацией о всех сообщениях канала/чата'''
 	offset_msg = 0    # номер записи, с которой начинается считывание
 	limit_msg = 100   # максимальное число записей, передаваемых за один раз
@@ -97,14 +92,14 @@ async def dump_all_participants(channel):
 			break
 
 	with open('channel_messages.json', 'w', encoding='utf8') as outfile:
-		 json.dump(all_messages, outfile, ensure_ascii=False, cls=DateTimeEncoder)"""
+		 json.dump(all_messages, outfile, ensure_ascii=False, cls=DateTimeEncoder)
 
 
 async def main():
 	url = input("Введите ссылку на канал или чат: ")
 	channel = await client.get_entity(url)
 	await dump_all_participants(channel)
-	#await dump_all_messages(channel)
+	await dump_all_messages(channel)
 
 
 with client:
